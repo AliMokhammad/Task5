@@ -19,8 +19,8 @@ jobs:
                
       - run: |
          sudo /etc/init.d/mysql start
-         mysql -e 'CREATE DATABASE ${{ env.DB_DATABASE }};' -u${{ env.DB_USER }} -p${{ env.DB_PASSWORD }}
-         mysql ${{ env.DB_DATABASE }} < CREATE.sql -u${{ env.DB_USER }} -p${{ env.DB_PASSWORD }}
+         mysql -e 'CREATE DATABASE mydb;' -uroot -proot
+         mysql mydb < CREATE.sql -uroot -proot
 
   build:
     needs: db
