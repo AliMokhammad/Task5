@@ -1,30 +1,26 @@
 
-name: Task_5_CI
+name: Task_5
 
 on:
   push:
-    branches: [ master ]
-  pull_request:
     branches: [ master ]
 
 jobs:
   db:
     runs-on: ubuntu-18.04
     env:
-      DB_DATABASE: dostavim
+      DB_DATABASE: mydb
       DB_USER: root
       DB_PASSWORD: root
 
 
     steps:
-      - name: checkout_master_branch
-        uses: actions/checkout@v2
-       
-      - name: Set up MySQL
-        run: |
+      - uses: actions/checkout@v2
+               
+      - run: |
          sudo /etc/init.d/mysql start
          mysql -e 'CREATE DATABASE ${{ env.DB_DATABASE }};' -u${{ env.DB_USER }} -p${{ env.DB_PASSWORD }}
-         mysql ${{ env.DB_DATABASE }} < /home/runner/work/Task5/Task5/CREATE.sql -u${{ env.DB_USER }} -p${{ env.DB_PASSWORD }}
+         mysql ${{ env.DB_DATABASE }} < CREATE.sql -u${{ env.DB_USER }} -p${{ env.DB_PASSWORD }}
          mysql -e 'USE ${{ env.DB_DATABASE }}; SHOW TABLES;' -u${{ env.DB_USER }} -p${{ env.DB_PASSWORD }}
   build:
     needs: db
