@@ -39,7 +39,7 @@ jobs:
             java-version: 1.8
 
       - name: build_java_with_maven
-        run: mvn -B package --file pom.xml
+        run: mvn package -P init-base
         
       - run: ls -a
       - run: |
