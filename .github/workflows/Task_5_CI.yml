@@ -13,6 +13,7 @@ jobs:
     steps:
       - uses: mirromutth/mysql-action@v1.1
         with:
+          mysql version: '5.7'
           mysql user: 'user' # Required if "mysql root password" is empty, default is empty. The superuser for the specified database. Can use secrets, too
           mysql password: user# Required if "mysql user" exists. The password for the "mysql user"
 
