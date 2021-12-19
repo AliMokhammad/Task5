@@ -7,7 +7,7 @@ on:
 
 jobs:
   db:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     env:
       DB_DATABASE: mydb
       DB_USER: root
@@ -21,10 +21,10 @@ jobs:
          sudo /etc/init.d/mysql start
          mysql -e 'CREATE DATABASE ${{ env.DB_DATABASE }};' -u${{ env.DB_USER }} -p${{ env.DB_PASSWORD }}
          mysql ${{ env.DB_DATABASE }} < CREATE.sql -u${{ env.DB_USER }} -p${{ env.DB_PASSWORD }}
-         mysql -e 'USE ${{ env.DB_DATABASE }}; SHOW TABLES;' -u${{ env.DB_USER }} -p${{ env.DB_PASSWORD }}
+
   build:
     needs: db
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     steps:
       - name: checkout_master_branch
         uses: actions/checkout@v2
