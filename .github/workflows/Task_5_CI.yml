@@ -41,7 +41,8 @@ jobs:
       - name: build_java_with_maven
         run: mvn package -P init-base
         
-      - run: ls -a
-      - run: |
-          cd target
-          ls -a
+      - name: upload_artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: jar-file
+          path: target/*.jar
