@@ -9,17 +9,21 @@ on:
 
 jobs:
   db:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
+    env:
+      DB_DATABASE: test_db
+      DB_USER: root
+      DB_PASSWORD: root
+
     steps:
-      - uses: mirromutth/mysql-action@v1.1
-        with:
-          mysql version: '5.7'
-          mysql user: 'user' # Required if "mysql root password" is empty, default is empty. The superuser for the specified database. Can use secrets, too
-          mysql password: user# Required if "mysql user" exists. The password for the "mysql user"
+      - name: Set up MySQL
+        run: |
+         sudo /etc/init.d/mysql start
+         mysql -e 'CREATE DATABASE ${{ env.DB_DATABASE }};' -u${{ env.DB_USER }} -p${{ env.DB_PASSWORD }}
 
   build:
     needs: db
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     steps:
       - name: checkout_master_branch
         uses: actions/checkout@v2
