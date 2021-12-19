@@ -1,0 +1,28 @@
+
+name: Task_5_CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout_master_branch
+        uses: actions/checkout@v2
+
+      - name: setup_jdk
+        uses: actions/setup-java@v8
+        with:
+            java-version: 8
+
+      - name: build_java_with_maven
+        run: mvn -B package --file pom.xml
+        
+      - run: ls -a
+      - run: |
+          cd target,
+          ls -a
