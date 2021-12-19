@@ -23,10 +23,10 @@ jobs:
         run: |
          ls -a /home/runner/work/Task5/Task5
          sudo /etc/init.d/mysql start
-         mysql -e 'CREATE DATABASE ${{ env.DB_DATABASE }};' -u ${{ env.DB_USER }} -p ${{ env.DB_PASSWORD }}
+         mysql -e 'CREATE DATABASE ${{ env.DB_DATABASE }};' -u ${{ env.DB_USER }} 
          mysql -u ${{ env.DB_USER }} ${{ env.DB_DATABASE }} < /home/runner/work/Task5/Task5/CREATE.sql
-         mysql -e 'USE ${{ env.DB_DATABASE }}; SHOW TABLES;' -u ${{ env.DB_USER }} -p ${{ env.DB_PASSWORD }}
-
+         mysql -e 'USE ${{ env.DB_DATABASE }}; SHOW TABLES;' -u ${{ env.DB_USER }} 
+  #-p ${{ env.DB_PASSWORD }}
   build:
     needs: db
     runs-on: ubuntu-18.04
