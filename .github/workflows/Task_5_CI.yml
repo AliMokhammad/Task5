@@ -12,9 +12,9 @@ jobs:
     runs-on: ubuntu-18.04
     env:
       DB_DATABASE: test_db
-      DB_USER: user
-      DB_PASSWORD: user
-      DB_ROOT_PASSWORD: root
+      DB_USER: root
+      DB_PASSWORD: root
+
 
     steps:
       - name: checkout_master_branch
@@ -23,9 +23,9 @@ jobs:
       - name: Set up MySQL
         run: |
          sudo /etc/init.d/mysql start
-         mysql -h 127.0.0.1 -e 'USE ${{ env.DB_DATABASE }}; SHOW TABLES;' -u root -p root
-         
-  #-p ${{ env.DB_PASSWORD }}
+         mysql -e 'CREATE DATABASE ${{ env.DB_DATABASE }};' -u${{ env.DB_USER }} -p${{ env.DB_PASSWORD }}
+         mysql ${{ env.DB_DATABASE }} < /home/runner/work/Task5/Task5/CREATE.sql -u${{ env.DB_USER }} -p${{ env.DB_PASSWORD }}
+         mysql -e 'USE ${{ env.DB_DATABASE }}; SHOW TABLES;' -u${{ env.DB_USER }} -p${{ env.DB_PASSWORD }}
   build:
     needs: db
     runs-on: ubuntu-18.04
