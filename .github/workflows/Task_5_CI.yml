@@ -18,6 +18,7 @@ jobs:
     steps:
       - name: Set up MySQL
         run: |
+         ls -a /github/workspace
          sudo /etc/init.d/mysql start
          mysql -e 'CREATE DATABASE ${{ env.DB_DATABASE }};' -u${{ env.DB_USER }} -p${{ env.DB_PASSWORD }}
          mysql -u ${{ env.DB_USER }} ${{ env.DB_DATABASE }} < CREATE.sql
