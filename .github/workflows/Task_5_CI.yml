@@ -23,9 +23,9 @@ jobs:
       - name: Set up MySQL
         run: |
          sudo /etc/init.d/mysql start
-         mysql  -u root -p root  -e 'CREATE DATABASE ${{ env.DB_DATABASE }};'
-         mysql  -u root -p root  ${{ env.DB_DATABASE }} < /home/runner/work/Task5/Task5/CREATE.sql
-         mysql  -u root -p root -e 'USE ${{ env.DB_DATABASE }}; SHOW TABLES;'
+         mysql -e 'CREATE DATABASE ${{ env.DB_DATABASE }};'
+         mysql ${{ env.DB_DATABASE }} < /home/runner/work/Task5/Task5/CREATE.sql
+         mysql -e 'USE ${{ env.DB_DATABASE }}; SHOW TABLES;'
          
   #-p ${{ env.DB_PASSWORD }}
   build:
