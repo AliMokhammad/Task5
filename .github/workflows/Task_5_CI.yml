@@ -16,6 +16,9 @@ jobs:
       DB_PASSWORD: root
 
     steps:
+      - name: checkout_master_branch
+        uses: actions/checkout@v2
+       
       - name: Set up MySQL
         run: |
          ls -a /github/workspace
