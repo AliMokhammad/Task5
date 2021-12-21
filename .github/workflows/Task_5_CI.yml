@@ -20,7 +20,6 @@ jobs:
       - run: |
          sudo /etc/init.d/mysql start
          mysql -e 'CREATE DATABASE mydb;' -uroot -proot
-         mysql mydb < CREATE.sql -uroot -proot
 
   java:
     needs: mysql
