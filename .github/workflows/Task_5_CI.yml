@@ -39,3 +39,12 @@ jobs:
         with:
           name: artifacts-jar
           path: target
+          
+          
+          
+      - run: mvn package -P web-app clean package
+               
+      - uses: actions/upload-artifact@v2
+        with:
+          name: artifacts-web-app-jar
+          path: target
